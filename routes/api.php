@@ -10,3 +10,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('country', [CountryController::class,'country']);
+// Get one data use id
+Route::get('country/{id}', [CountryController::class,'countryone']);
+
+// Add Data in table
+
+
+
+Route::post('countryCreate', [CountryController::class,'countryCreate']);
