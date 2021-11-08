@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Country;
 use Illuminate\Http\Request;
+use \Illuminate\Support\Facades\Validator;
+
+
 
 class CountryController extends Controller
 {
@@ -36,6 +39,35 @@ class CountryController extends Controller
      */
     public function store(Request $request)
     {
+
+        // Add some Validationm
+
+        $roule = [
+
+            "iso"        =>"required |min:2",
+            "name"       =>"required",
+            "dname"      =>"required",
+            "iso3"       =>"required",
+            "position"   =>"required",
+            "numcode"   =>"required",
+            "phonecode" =>"required",
+            "created"   =>"required",
+            "register_by"=>"required",
+            "modified"  =>"required",
+            "modified_by"=>"required",
+            "record_deleted"=>"required"
+
+        ];
+
+     $validator = Validator::make($request->all(),$roule);
+
+
+        if ($validator->fails()) {
+
+            return response()->json($validator->errors(),400);
+        }
+
+
 
       $data =   Country::create($request->all());
       return response()->json($data,201);
@@ -89,9 +121,40 @@ class CountryController extends Controller
         if (is_null($country)) {
             return response()->json(['message'=>"Not Field Found"]);
 
+        }else {
+
+
+
+        $roule = [
+
+            "iso"        =>"required |min:2",
+            "name"       =>"required",
+            "dname"      =>"required",
+            "iso3"       =>"required",
+            "position"   =>"required",
+            "numcode"   =>"required",
+            "phonecode" =>"required",
+            "created"   =>"required",
+            "register_by"=>"required",
+            "modified"  =>"required",
+            "modified_by"=>"required",
+            "record_deleted"=>"required"
+
+        ];
+
+     $validator = Validator::make($request->all(),$roule);
+
+
+        if ($validator->fails()) {
+
+            return response()->json($validator->errors(),400);
+        }else {
+
+            $country->update($request->all());
+            return response()->json($country);
+
         }
-        $country->update($request->all());
-        return response()->json($country);
+    }
 
     }
 
