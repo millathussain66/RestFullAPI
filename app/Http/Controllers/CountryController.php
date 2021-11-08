@@ -77,19 +77,9 @@ class CountryController extends Controller
     public function update(Request $request, $id)
     {
 
-
         $country =  Country::find($id); //Find A data Form Database
-
         $country->update($request->all());
-
         return response()->json($country);
-
-
-
-
-
-
-
 
     }
 
@@ -101,6 +91,10 @@ class CountryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $country =  Country::find($id);
+
+        $country->delete();
+
+        return response()->json(['message'=>'Fild Delete Success']);
     }
 }
