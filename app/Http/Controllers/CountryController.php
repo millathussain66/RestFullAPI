@@ -51,9 +51,17 @@ class CountryController extends Controller
      */
     public function show($id)
     {
-
         $find =  Country::find($id);
-        return response()->json($find);
+        // Validation Part
+        if (is_null($find)) {
+            return response()->json(['message','This Fild is not Found ! ']);
+        }else {
+
+            return response()->json($find);
+        }
+
+
+
     }
 
     /**
@@ -78,6 +86,10 @@ class CountryController extends Controller
     {
 
         $country =  Country::find($id); //Find A data Form Database
+        if (is_null($country)) {
+            return response()->json(['message'=>"Not Field Found"]);
+
+        }
         $country->update($request->all());
         return response()->json($country);
 
@@ -93,8 +105,15 @@ class CountryController extends Controller
     {
         $country =  Country::find($id);
 
-        $country->delete();
+        if (is_null($country)) {
+            return response()->json(['message'=>"Not Field Found"]);
+
+        }else {
+            $country->delete();
 
         return response()->json(['message'=>'Fild Delete Success']);
+        }
+
+
     }
 }
