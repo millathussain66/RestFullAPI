@@ -122,11 +122,7 @@ class CountryController extends Controller
             return response()->json(['message'=>"Not Field Found"]);
 
         }else {
-
-
-
         $roule = [
-
             "iso"        =>"required |min:2",
             "name"       =>"required",
             "dname"      =>"required",
@@ -141,7 +137,6 @@ class CountryController extends Controller
             "record_deleted"=>"required"
 
         ];
-
      $validator = Validator::make($request->all(),$roule);
 
 
@@ -157,7 +152,6 @@ class CountryController extends Controller
     }
 
     }
-
     /**
      * Remove the specified resource from storage.
      *
@@ -176,7 +170,5 @@ class CountryController extends Controller
 
         return response()->json(['message'=>'Fild Delete Success']);
         }
-
-
     }
 }
