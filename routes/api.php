@@ -11,7 +11,16 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 
-Route::apiResource('country', CountryController::class);
+
+
+Route::group(['middleware' => 'auth:api'], function (){
+
+
+    Route::apiResource('country', CountryController::class);
+
+
+});
+
 
 
 
